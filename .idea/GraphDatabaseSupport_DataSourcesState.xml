@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GraphDatabaseSupport.DataSourcesState">
+    <option name="containerV1">
+      <DataSourceContainerV1>
+        <option name="dataSources">
+          <list>
+            <DataSourceV1>
+              <option name="uuid" value="8e8d2739-3606-449f-9011-e6903c45c800" />
+              <option name="name" value="post" />
+              <option name="dataSourceType" value="NEO4J_BOLT" />
+              <option name="configuration">
+                <map>
+                  <entry key="authType" value="User &amp; Password" />
+                  <entry key="database" value="Test" />
+                  <entry key="host" value="localhost" />
+                  <entry key="password" value="31415926" />
+                  <entry key="port" value="6379" />
+                  <entry key="protocol" value="bolt" />
+                  <entry key="user" value="postgres" />
+                </map>
+              </option>
+            </DataSourceV1>
+          </list>
+        </option>
+      </DataSourceContainerV1>
+    </option>
+  </component>
+</project>
