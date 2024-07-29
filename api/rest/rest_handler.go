@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/VladislavSCV/Test3/internal/db"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,7 +23,7 @@ func RunRestServer() {
 	r := gin.Default()
 
 	r.GET("/ping", Pong)
-	r.POST("/sendMessage", SendMessage)
+	r.POST("/saveMessage", SaveMessage)
 
 	err := r.Run(":8000")
 	if err != nil {
@@ -36,10 +38,11 @@ func Pong(c *gin.Context) {
 	})
 }
 
-func SendMessage(c *gin.Context) {
+func SaveMessage(c *gin.Context) {
 	var message RequestMessage
 	if c.ShouldBind(&message) != nil {
 		log.Println(message.Message)
 	}
-	c.String(http.StatusOK, "OK")
+	db.AddMessageToDB(message.Message)
+	c.Redirect(http.StatusFound, "http://localhost:8080/i")
 }
