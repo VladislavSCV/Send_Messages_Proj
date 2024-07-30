@@ -8,43 +8,6 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
-var (
-	topic   = "123"
-	groupID = "my-group"
-)
-
-//func main() {
-//	var wg sync.WaitGroup
-//
-//	// Запуск продюсера
-//	wg.Add(1)
-//	go func() {
-//		defer wg.Done()
-//		producer := NewKafkaProducer([]string{"localhost:9092"}, topic)
-//		defer producer.Close()
-//
-//		for i := 0; i < 10; i++ {
-//			message := fmt.Sprintf("message %d", i)
-//			if err := producer.SendMessage(message); err != nil {
-//				log.Println("не удалось отправить сообщение:", err)
-//			}
-//			time.Sleep(1 * time.Second) // имитируем задержку между сообщениями
-//		}
-//	}()
-//
-//	// Запуск консьюмера
-//	wg.Add(1)
-//	go func() {
-//		defer wg.Done()
-//		consumer := NewKafkaConsumer([]string{"localhost:9092"}, topic, groupID)
-//		defer consumer.Close()
-//
-//		consumer.ConsumeMessages()
-//	}()
-//
-//	wg.Wait()
-//}
-
 // KafkaProducer - структура для продюсера Kafka
 type KafkaProducer struct {
 	writer *kafka.Writer
@@ -90,7 +53,7 @@ func NewKafkaConsumer(brokers []string, topic, groupID string) *KafkaConsumer {
 }
 
 // ConsumeMessages - потребляет сообщения из Kafka
-func (c *KafkaConsumer) ConsumeMessages() {
+func (c *KafkaConsumer) ConsumeMessages() (string, error) {
 	for {
 		msg, err := c.reader.ReadMessage(context.Background())
 		if err != nil {
@@ -98,6 +61,7 @@ func (c *KafkaConsumer) ConsumeMessages() {
 			continue
 		}
 		fmt.Printf("получено: %s\n", string(msg.Value))
+		return string(msg.Value), nil
 	}
 }
 

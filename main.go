@@ -7,7 +7,6 @@ import (
 	"github.com/VladislavSCV/Test3/api/rest"
 	"github.com/VladislavSCV/Test3/internal/db"
 	"github.com/VladislavSCV/Test3/web"
-	//"github.com/VladislavSCV/Test3/internal/kafka"
 )
 
 var (

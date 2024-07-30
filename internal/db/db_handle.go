@@ -4,10 +4,14 @@ import (
 	"database/sql"
 	"log"
 
+	"github.com/VladislavSCV/Test3/internal/kafka"
 	_ "github.com/lib/pq"
 )
 
-var db *sql.DB
+var (
+	db    *sql.DB
+	topic = "123"
+)
 
 func RunDbServer() {
 	var err error
@@ -31,6 +35,17 @@ func AddMessageToDB(message string) bool {
 	if err != nil {
 		log.Printf("ERROR INSERTING DATA: %v", err)
 		return false
+	}
+	producer := kafka.NewKafkaProducer([]string{"localhost:9092"}, topic)
+	defer func(producer *kafka.KafkaProducer) {
+		err := producer.Close()
+		if err != nil {
+
+		}
+	}(producer)
+
+	if err := producer.SendMessage(message); err != nil {
+		log.Println("не удалось отправить сообщение:", err)
 	}
 	return true
 }

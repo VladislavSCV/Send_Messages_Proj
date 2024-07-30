@@ -29,10 +29,6 @@
             margin-bottom: 20px;
         }
 
-        .ping-section, .message-section {
-            margin-bottom: 20px;
-        }
-
         button {
             background-color: #007bff;
             color: #fff;
@@ -64,19 +60,9 @@
 <div class="container">
     <h1>Go REST API Client</h1>
 
-    <div class="ping-section">
-        <a href="http://127.0.0.1:8000/ping"><button>Ping Server</button></a>
-        <p id="pingResult"></p>
-    </div>
-    <a href="http://localhost:8080/ir"><button>Go to Messages</button></a>
-    <div class="message-section">
-        <form id="messageForm" method="post" action="http://127.0.0.1:8000/saveMessage">
-            <label for="message">Message:</label>
-            <input type="text" id="message" name="message" required>
-            <button type="submit">Send Message</button>
-        </form>
-        <p id="messageResult"></p>
-    </div>
+    <h1>Results:</h1>
+    <h2>{{ .lst }}</h2>
+
 </div>
 </body>
 </html>
